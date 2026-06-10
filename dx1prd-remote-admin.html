@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DX1PRD Remote Station — Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C8952A;
+    --gold-light: #F0B942;
+    --bg: #0A0C0F;
+    --surface: #111418;
+    --surface2: #181C22;
+    --border: #2A2F3A;
+    --text: #E8EAF0;
+    --muted: #7A8090;
+    --green: #27AE60;
+    --red: #C0392B;
+  }
+
+  html, body { height: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── TOPBAR ── */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+  }
+  .topbar-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    border-left: 1px solid var(--border);
+    padding-left: 16px;
+    text-transform: uppercase;
+  }
+  .topbar-right { display: flex; align-items: center; gap: 10px; }
+
+  /* ── BUTTONS ── */
+  .btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 7px 14px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--muted);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .btn:hover { border-color: var(--gold); color: var(--gold-light); }
+  .btn-primary { background: var(--gold); color: #0A0C0F; border-color: var(--gold); }
+  .btn-primary:hover { background: var(--gold-light); color: #0A0C0F; border-color: var(--gold-light); }
+  .btn-sm { padding: 4px 10px; font-size: 10px; }
+  .btn-approve { background: rgba(39,174,96,0.1); border-color: rgba(39,174,96,0.3); color: #4ADE80; }
+  .btn-approve:hover { background: rgba(39,174,96,0.2); border-color: #4ADE80; color: #4ADE80; }
+  .btn-deny { background: rgba(192,57,43,0.1); border-color: rgba(192,57,43,0.3); color: #F87171; }
+  .btn-deny:hover { background: rgba(192,57,43,0.2); border-color: #F87171; color: #F87171; }
+
+  /* ── SETUP BANNER ── */
+  .setup-banner {
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .setup-banner p {
+    font-size: 12px;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .setup-banner strong { color: var(--gold-light); }
+  .setup-banner input {
+    flex: 1;
+    min-width: 280px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    padding: 7px 12px;
+    border-radius: 3px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .setup-banner input:focus { border-color: var(--gold); }
+  .setup-banner input::placeholder { color: #3A4050; }
+
+  /* ── MAIN ── */
+  .main { padding: 28px 32px; }
+
+  /* ── STATS ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 18px 20px;
+  }
+  .stat-label {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .stat-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    line-height: 1;
+    color: #fff;
+  }
+  .sv-gold { color: var(--gold); }
+  .sv-amber { color: var(--gold-light); }
+  .sv-green { color: #4ADE80; }
+  .sv-red { color: #F87171; }
+
+  /* ── TOOLBAR ── */
+  .toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .filter-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-right: 4px;
+  }
+  .filter-btn {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover { color: var(--text); }
+  .filter-btn.active { border-color: var(--gold); color: var(--gold-light); background: rgba(200,149,42,0.07); }
+  .search-wrap { margin-left: auto; }
+  .search-input {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 3px;
+    outline: none;
+    width: 210px;
+    transition: border-color 0.2s;
+  }
+  .search-input:focus { border-color: var(--gold); }
+  .search-input::placeholder { color: #3A4050; }
+
+  /* ── TABLE ── */
+  .table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    overflow-x: auto;
+  }
+  table { width: 100%; border-collapse: collapse; min-width: 700px; }
+  thead tr { background: var(--surface2); border-bottom: 1px solid var(--border); }
+  th {
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(42,47,58,0.5);
+    vertical-align: middle;
+    color: var(--text);
+  }
+  tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: rgba(255,255,255,0.018); }
+
+  .callsign {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.06em;
+    color: var(--gold-light);
+  }
+  .name-cell { font-weight: 500; font-size: 13px; }
+  .meta-cell { font-size: 11px; color: var(--muted); line-height: 1.55; }
+  .use-pill {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    padding: 2px 8px;
+    border-radius: 2px;
+    background: rgba(37,99,235,0.1);
+    color: #93C5FD;
+    border: 1px solid rgba(37,99,235,0.2);
+    white-space: nowrap;
+  }
+
+  /* ── BADGES ── */
+  .badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .b-pending { background: rgba(200,149,42,0.1); color: var(--gold-light); border: 1px solid rgba(200,149,42,0.25); }
+  .b-approved { background: rgba(39,174,96,0.1); color: #4ADE80; border: 1px solid rgba(39,174,96,0.25); }
+  .b-denied { background: rgba(192,57,43,0.1); color: #F87171; border: 1px solid rgba(192,57,43,0.25); }
+
+  .actions { display: flex; gap: 6px; align-items: center; }
+
+  /* ── EMPTY STATE ── */
+  .empty-state {
+    text-align: center;
+    padding: 56px 24px;
+    color: var(--muted);
+  }
+  .empty-icon { font-size: 36px; margin-bottom: 14px; opacity: 0.35; }
+  .empty-state p { font-size: 13px; line-height: 1.7; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.72);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    width: 540px;
+    max-width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .modal-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    z-index: 2;
+  }
+  .modal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: #fff;
+    letter-spacing: 0.05em;
+  }
+  .modal-close {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+    padding: 4px 6px;
+    border-radius: 3px;
+    transition: color 0.15s;
+  }
+  .modal-close:hover { color: var(--text); }
+  .modal-body { padding: 20px 24px; flex: 1; }
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(42,47,58,0.5);
+    font-size: 13px;
+  }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-key {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    flex-shrink: 0;
+    padding-top: 1px;
+    min-width: 110px;
+  }
+  .detail-val { color: var(--text); font-weight: 500; text-align: right; word-break: break-word; }
+  .modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    position: sticky;
+    bottom: 0;
+    background: var(--surface);
+  }
+
+  /* ── TOAST ── */
+  .toast-bar {
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    z-index: 200;
+    font-size: 13px;
+    padding: 11px 18px;
+    border-radius: 3px;
+    display: none;
+    max-width: 360px;
+    line-height: 1.5;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  }
+  .t-ok { background: rgba(39,174,96,0.14); border: 1px solid rgba(39,174,96,0.4); color: #4ADE80; }
+  .t-err { background: rgba(192,57,43,0.14); border: 1px solid rgba(192,57,43,0.4); color: #F87171; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .topbar { padding: 0 16px; }
+    .main { padding: 20px 16px; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .setup-banner { padding: 12px 16px; }
+    .topbar-title { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-left">
+    <a class="logo" href="dx1prd-remote-portal.html">DX1PRD</a>
+    <span class="topbar-title">Remote Station — Admin</span>
+  </div>
+  <div class="topbar-right">
+    <button class="btn" onclick="loadApplications()">&#8635; Refresh</button>
+    <button class="btn" onclick="exportCSV()">&#11123; Export CSV</button>
+    <button class="btn btn-primary" onclick="toggleSetup()">&#9881; Setup</button>
+  </div>
+</header>
+
+<!-- SETUP BANNER -->
+<div class="setup-banner" id="setup-banner">
+  <p><strong>Connect to Google Sheets</strong> — paste your GAS Web App URL to load live applications.</p>
+  <input type="text" id="gas-url-input" placeholder="https://script.google.com/macros/s/…/exec" oninput="saveGasUrl()">
+  <button class="btn btn-primary" onclick="loadApplications()">Load</button>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">Total Applications</div>
+      <div class="stat-value sv-gold" id="stat-total">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Pending Review</div>
+      <div class="stat-value sv-amber" id="stat-pending">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Approved</div>
+      <div class="stat-value sv-green" id="stat-approved">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Denied</div>
+      <div class="stat-value sv-red" id="stat-denied">—</div>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <span class="filter-label">Filter:</span>
+    <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+    <button class="filter-btn" onclick="setFilter('Pending', this)">Pending</button>
+    <button class="filter-btn" onclick="setFilter('Approved', this)">Approved</button>
+    <button class="filter-btn" onclick="setFilter('Denied', this)">Denied</button>
+    <div class="search-wrap">
+      <input class="search-input" id="search-box" type="text" placeholder="Search callsign or name…" oninput="renderTable()">
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Callsign</th>
+          <th>Name</th>
+          <th>License / Country</th>
+          <th>Intended Use</th>
+          <th>Requested Slot</th>
+          <th>Applied</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="app-tbody"></tbody>
+    </table>
+  </div>
+
+</main>
+
+<!-- DETAIL MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-el">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title-el">Application Detail</div>
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer" id="modal-footer"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-bar" id="toast-bar"></div>
+
+<script>
+  // ── CONFIG ──────────────────────────────────────────────────
+  const GAS_KEY = 'dx1prd_admin_gas_url';
+
+  let allApps = [];
+  let currentFilter = 'all';
+
+  // ── SETUP ───────────────────────────────────────────────────
+  function getSavedUrl() { return localStorage.getItem(GAS_KEY) || ''; }
+
+  function saveGasUrl() {
+    const v = document.getElementById('gas-url-input').value.trim();
+    localStorage.setItem(GAS_KEY, v);
+  }
+
+  function toggleSetup() {
+    const b = document.getElementById('setup-banner');
+    b.style.display = (b.style.display === 'none') ? 'flex' : 'none';
+  }
+
+  window.addEventListener('load', () => {
+    const saved = getSavedUrl();
+    if (saved) {
+      document.getElementById('gas-url-input').value = saved;
+      document.getElementById('setup-banner').style.display = 'none';
+      loadApplications();
+    } else {
+      showDemoData();
+    }
+  });
+
+  // ── LOAD FROM GAS ───────────────────────────────────────────
+  async function loadApplications() {
+    const url = getSavedUrl();
+    if (!url) {
+      showToast('Paste your GAS URL in the Setup field first.', true);
+      return;
+    }
+    try {
+      const res = await fetch(url + '?action=getAll');
+      const data = await res.json();
+      allApps = data.applications || [];
+      updateStats();
+      renderTable();
+      showToast('Loaded ' + allApps.length + ' application' + (allApps.length !== 1 ? 's' : '') + '.', false);
+    } catch (err) {
+      showToast('Could not reach Google Sheets. Showing demo data.', true);
+      showDemoData();
+    }
+  }
+
+  // ── DEMO DATA ───────────────────────────────────────────────
+  function showDemoData() {
+    allApps = [
+      { row:2, timestamp:'2026-06-08T10:22:00Z', name:'Juan dela Cruz',   callsign:'DW1JDC', license:'General',         country:'Philippines',  experience:'Intermediate (3–7 years)', intendedUse:'DX chasing',              date:'2026-06-15', slot:'0800–1200 UTC', email:'juan@example.com',   notes:'Interested in 20m SSB.',          status:'Pending'  },
+      { row:3, timestamp:'2026-06-07T08:11:00Z', name:'Maria Santos',     callsign:'DW1MRS', license:'Full (CEPT)',      country:'Philippines',  experience:'Experienced (8–15 years)', intendedUse:'Contest operation',       date:'2026-06-20', slot:'0000–0400 UTC', email:'maria@example.com',  notes:'IOTA contest planning.',          status:'Approved' },
+      { row:4, timestamp:'2026-06-06T14:55:00Z', name:'Robert Kim',       callsign:'HL2RBK', license:'Full (CEPT)',      country:'South Korea',  experience:'Veteran (15+ years)',       intendedUse:'Casual / ragchewing',     date:'2026-06-18', slot:'1200–1600 UTC', email:'robert@example.com', notes:'',                               status:'Pending'  },
+      { row:5, timestamp:'2026-06-05T06:30:00Z', name:'Carlos Reyes',     callsign:'DW1CAR', license:'Technician',       country:'Philippines',  experience:'Beginner (0–2 years)',      intendedUse:'Training / club activity',date:'2026-06-12', slot:'1600–2000 UTC', email:'carlos@example.com', notes:'New member, needs guidance.',     status:'Denied'   },
+      { row:6, timestamp:'2026-06-04T11:00:00Z', name:'Lot Valiente',     callsign:'DW1IRF', license:'Extra / Advanced', country:'Philippines',  experience:'Veteran (15+ years)',       intendedUse:'Emergency / PAREDN',      date:'2026-06-11', slot:'0400–0800 UTC', email:'lot@example.com',    notes:'PAREDN net coordinator test.',    status:'Approved' },
+      { row:7, timestamp:'2026-06-03T09:15:00Z', name:'Alex Mendoza',     callsign:'DW1AMX', license:'General',         country:'Philippines',  experience:'Intermediate (3–7 years)', intendedUse:'DX chasing',              date:'2026-06-25', slot:'0800–1200 UTC', email:'alex@example.com',   notes:'40m DX interest.',               status:'Pending'  },
+    ];
+    updateStats();
+    renderTable();
+    showToast('Demo mode — connect your GAS URL to load live data.', false);
+  }
+
+  // ── STATS ───────────────────────────────────────────────────
+  function updateStats() {
+    document.getElementById('stat-total').textContent    = allApps.length;
+    document.getElementById('stat-pending').textContent  = allApps.filter(a => a.status === 'Pending').length;
+    document.getElementById('stat-approved').textContent = allApps.filter(a => a.status === 'Approved').length;
+    document.getElementById('stat-denied').textContent   = allApps.filter(a => a.status === 'Denied').length;
+  }
+
+  // ── FILTER ──────────────────────────────────────────────────
+  function setFilter(f, el) {
+    currentFilter = f;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+    renderTable();
+  }
+
+  // ── RENDER TABLE ────────────────────────────────────────────
+  function renderTable() {
+    const search = (document.getElementById('search-box').value || '').toLowerCase();
+    const apps = allApps.filter(a => {
+      const matchFilter = currentFilter === 'all' || a.status === currentFilter;
+      const matchSearch = !search
+        || a.callsign.toLowerCase().includes(search)
+        || a.name.toLowerCase().includes(search);
+      return matchFilter && matchSearch;
+    });
+
+    const tbody = document.getElementById('app-tbody');
+    if (!apps.length) {
+      tbody.innerHTML = `<tr><td colspan="8">
+        <div class="empty-state">
+          <div class="empty-icon">&#128236;</div>
+          <p>No applications match the current filter.<br>
+          Connect your GAS URL and click <strong>Refresh</strong> to load live data.</p>
+        </div></td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = apps.map(a => {
+      const badgeClass = a.status === 'Approved' ? 'b-approved' : a.status === 'Denied' ? 'b-denied' : 'b-pending';
+      const appliedDate = a.timestamp ? new Date(a.timestamp).toLocaleDateString('en-PH', { month:'short', day:'numeric', year:'numeric' }) : '—';
+      const slotDisplay = [a.date, a.slot].filter(Boolean).join(' · ') || '—';
+      const actionBtns = a.status === 'Pending'
+        ? `<button class="btn btn-sm btn-approve" onclick="updateStatus(${a.row},'Approved')" title="Approve">&#10003;</button>
+           <button class="btn btn-sm btn-deny"    onclick="updateStatus(${a.row},'Denied')"   title="Deny">&#10007;</button>`
+        : '';
+      return `<tr>
+        <td><span class="callsign">${esc(a.callsign)}</span></td>
+        <td><span class="name-cell">${esc(a.name)}</span></td>
+        <td><span class="meta-cell">${esc(a.license)}<br>${esc(a.country)}</span></td>
+        <td><span class="use-pill">${esc(a.intendedUse || '—')}</span></td>
+        <td class="meta-cell">${esc(slotDisplay)}</td>
+        <td class="meta-cell">${esc(appliedDate)}</td>
+        <td><span class="badge ${badgeClass}">${esc(a.status)}</span></td>
+        <td>
+          <div class="actions">
+            <button class="btn btn-sm" onclick="openDetail(${a.row})">View</button>
+            ${actionBtns}
+          </div>
+        </td>
+      </tr>`;
+    }).join('');
+  }
+
+  function esc(s) {
+    return String(s || '')
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
+  }
+
+  // ── DETAIL MODAL ────────────────────────────────────────────
+  function openDetail(row) {
+    const a = allApps.find(x => x.row === row);
+    if (!a) return;
+
+    document.getElementById('modal-title-el').textContent = a.callsign + ' — ' + a.name;
+
+    const appliedFull = a.timestamp
+      ? new Date(a.timestamp).toLocaleString('en-PH', { dateStyle:'long', timeStyle:'short' })
+      : '—';
+
+    const fields = [
+      ['Callsign',      a.callsign],
+      ['Full Name',     a.name],
+      ['License Class', a.license],
+      ['Country',       a.country],
+      ['Experience',    a.experience],
+      ['Intended Use',  a.intendedUse],
+      ['Requested Date',a.date || '—'],
+      ['Time Slot',     a.slot || '—'],
+      ['Email',         a.email],
+      ['Notes',         a.notes || '(none)'],
+      ['Status',        a.status],
+      ['Applied',       appliedFull],
+    ];
+
+    document.getElementById('modal-body').innerHTML = fields.map(([k, v]) =>
+      `<div class="detail-row">
+        <span class="detail-key">${esc(k)}</span>
+        <span class="detail-val">${esc(v)}</span>
+      </div>`
+    ).join('');
+
+    const footer = document.getElementById('modal-footer');
+    let footerHTML = `<button class="btn" onclick="closeModal()">Close</button>`;
+    if (a.status === 'Pending') {
+      footerHTML += `
+        <button class="btn btn-deny"    onclick="updateStatus(${a.row},'Denied');  closeModal()">&#10007; Deny</button>
+        <button class="btn btn-approve" onclick="updateStatus(${a.row},'Approved');closeModal()">&#10003; Approve</button>`;
+    }
+    footer.innerHTML = footerHTML;
+
+    document.getElementById('modal-overlay').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+  }
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // ── UPDATE STATUS ───────────────────────────────────────────
+  async function updateStatus(row, status) {
+    const a = allApps.find(x => x.row === row);
+    if (!a) return;
+
+    a.status = status;
+    updateStats();
+    renderTable();
+
+    const icon = status === 'Approved' ? '✓' : '✕';
+    showToast(`${icon} ${status}: ${a.callsign} — email notification will be sent.`, false);
+
+    const url = getSavedUrl();
+    if (!url) return;
+
+    try {
+      const params = new URLSearchParams({
+        action:   'updateStatus',
+        row:      row,
+        status:   status,
+        callsign: a.callsign,
+        name:     a.name,
+        email:    a.email,
+        slot:     a.slot || '',
+        date:     a.date || ''
+      });
+      await fetch(url + '?' + params.toString(), { method: 'GET', mode: 'no-cors' });
+    } catch (err) {
+      showToast('Warning: could not sync status to Google Sheets.', true);
+    }
+  }
+
+  // ── EXPORT CSV ──────────────────────────────────────────────
+  function exportCSV() {
+    if (!allApps.length) { showToast('No data to export.', true); return; }
+    const headers = ['Timestamp','Name','Callsign','License','Country','Experience','Intended Use','Date','Slot','Email','Notes','Status'];
+    const rows = allApps.map(a => [
+      a.timestamp, a.name, a.callsign, a.license, a.country,
+      a.experience, a.intendedUse, a.date, a.slot, a.email, a.notes, a.status
+    ].map(v => '"' + String(v || '').replace(/"/g,'""') + '"').join(','));
+    const csv = [headers.join(','), ...rows].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'dx1prd-applications-' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('CSV exported.', false);
+  }
+
+  // ── TOAST ───────────────────────────────────────────────────
+  let toastTimer;
+  function showToast(msg, isErr) {
+    const t = document.getElementById('toast-bar');
+    t.textContent = msg;
+    t.className = 'toast-bar ' + (isErr ? 't-err' : 't-ok');
+    t.style.display = 'block';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { t.style.display = 'none'; }, 4500);
+  }
+</script>
+</body>
+</html>
