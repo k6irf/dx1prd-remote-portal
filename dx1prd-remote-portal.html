@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DX1PRD Remote Station Portal</title>
+<title>PAREDN Remote Station Portal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -385,9 +385,11 @@
 <body>
 
 <nav>
-  <a class="nav-logo" href="#">DX1PRD</a>
+  <a class="nav-logo" href="#">PAREDN</a>
   <ul class="nav-links">
-    <li><a href="#station">Station</a></li>
+    <li><a href="#stations">Stations</a></li>
+    <li><a href="#prereq">Prerequisites</a></li>
+    <li><a href="#station">Equipment</a></li>
     <li><a href="#policies">Policies</a></li>
     <li><a href="#apply">Apply</a></li>
   </ul>
@@ -400,7 +402,8 @@
   <div class="hero-glow"></div>
   <div class="hero-inner">
     <div class="badge"><span class="dot"></span> Station Online</div>
-    <h1>DX1PRD<br><em>Remote</em><br>Station</h1>
+    <h1>PAREDN<br><em>Remote</em><br>Station Portal</h1>
+    <p style="font-size:12px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;margin-top:-8px">Philippine Amateur Radio Emergency Data Network</p>
     <p class="hero-sub">Operate DX1PRD or KE6YEP remote stations from anywhere in the world. Full HF capability, remotely controlled via Tailscale VPN — available to licensed club members and affiliated friends of the club.</p>
     <div class="specs-row">
       <div class="spec"><span class="spec-label">PH Station</span><span class="spec-value">DX1PRD — Navotas</span></div>
@@ -417,7 +420,7 @@
 </section>
 
 <!-- STATION SELECTOR -->
-<section style="padding:48px 48px 0;border-bottom:1px solid var(--border)">
+<section style="padding:48px 48px 0;border-bottom:1px solid var(--border)" id="stations">
   <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:24px">
     Choose Your Station
     <span style="flex:1;height:1px;background:var(--border);display:block"></span>
@@ -473,6 +476,92 @@
   </div>
 </section>
 
+<!-- PREREQUISITES -->
+<section style="padding:48px;border-bottom:1px solid var(--border)" id="prereq">
+  <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:32px">
+    Prerequisites — What You Need Before Connecting
+    <span style="flex:1;height:1px;background:var(--border);display:block"></span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+
+    <!-- Tailscale -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:24px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+        <div style="width:36px;height:36px;background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.3);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px">🔒</div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;letter-spacing:0.05em">Tailscale VPN</div>
+          <div style="font-size:10px;color:var(--muted)">Required for access</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:16px">
+        Both stations are only accessible via <strong style="color:var(--text)">Tailscale VPN</strong>. You must be on the same Tailscale network as the station to connect.
+      </div>
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:12px;margin-bottom:12px">
+        <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Setup Steps</div>
+        <ol style="font-size:11px;color:var(--text);line-height:2;padding-left:16px">
+          <li>Download Tailscale from <strong>tailscale.com</strong></li>
+          <li>Install and sign in with your account</li>
+          <li>Contact trustee to be added to the network</li>
+          <li>Once approved, stations will appear in your Tailscale peer list</li>
+        </ol>
+      </div>
+      <a href="https://tailscale.com/download" target="_blank" style="display:block;text-align:center;background:rgba(37,99,235,0.15);color:#93C5FD;border:1px solid rgba(37,99,235,0.3);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:8px;border-radius:3px;text-decoration:none">Download Tailscale →</a>
+    </div>
+
+    <!-- Mumble -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:24px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+        <div style="width:36px;height:36px;background:rgba(200,149,42,0.15);border:1px solid rgba(200,149,42,0.3);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px">🎙️</div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;letter-spacing:0.05em">Mumble Client</div>
+          <div style="font-size:10px;color:var(--muted)">Required for audio</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:16px">
+        All TX/RX audio is routed through <strong style="color:var(--text)">Mumble</strong> (open-source voice chat). You need the Mumble client installed and configured to hear and transmit audio through the station.
+      </div>
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:12px;margin-bottom:12px">
+        <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Mumble Settings</div>
+        <table style="width:100%;font-size:11px;border-collapse:collapse">
+          <tr><td style="color:var(--muted);padding:2px 0">Server</td><td style="color:var(--gold-light);font-weight:600;font-family:monospace">Station Tailscale IP</td></tr>
+          <tr><td style="color:var(--muted);padding:2px 0">Port</td><td style="color:var(--text);font-weight:600;font-family:monospace">64738</td></tr>
+          <tr><td style="color:var(--muted);padding:2px 0">Password</td><td style="color:var(--text);font-weight:600;font-family:monospace">paredn2024</td></tr>
+          <tr><td style="color:var(--muted);padding:2px 0">Transmission</td><td style="color:#4ADE80;font-weight:600">Continuous</td></tr>
+          <tr><td style="color:var(--muted);padding:2px 0">Channel</td><td style="color:var(--text);font-weight:600">Root</td></tr>
+        </table>
+      </div>
+      <a href="https://www.mumble.info/downloads/" target="_blank" style="display:block;text-align:center;background:rgba(200,149,42,0.12);color:var(--gold-light);border:1px solid rgba(200,149,42,0.3);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:8px;border-radius:3px;text-decoration:none">Download Mumble →</a>
+    </div>
+
+    <!-- Web Browser + Tips -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:24px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+        <div style="width:36px;height:36px;background:rgba(39,174,96,0.12);border:1px solid rgba(39,174,96,0.3);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px">🌐</div>
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;letter-spacing:0.05em">Web Browser</div>
+          <div style="font-size:10px;color:var(--muted)">Station control interface</div>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:16px">
+        The station control panel runs in any modern browser. No plugins needed — just open the station URL while connected to Tailscale.
+      </div>
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:12px;margin-bottom:12px">
+        <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Station URLs (Tailscale)</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px">🇵🇭 DX1PRD — Philippines</div>
+        <div style="font-family:monospace;font-size:11px;color:var(--gold-light);margin-bottom:10px">http://100.69.3.43:3000</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px">🇺🇸 KE6YEP — California</div>
+        <div style="font-family:monospace;font-size:11px;color:#93C5FD">http://100.97.58.17:3000</div>
+      </div>
+      <div style="background:rgba(200,149,42,0.08);border:1px solid rgba(200,149,42,0.2);border-radius:3px;padding:10px">
+        <div style="font-size:10px;color:var(--gold-light);font-weight:600;margin-bottom:4px">⚠ IC-7300 Note (KE6YEP)</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.6">Set radio to <strong style="color:var(--text)">DATA MOD = MIC,USB</strong> and <strong style="color:var(--text)">DATA MOD OFF = USB</strong> for TX audio to work in normal SSB mode.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- MAIN CONTENT -->
 <div class="main-grid">
 
@@ -480,6 +569,8 @@
   <div class="panel-left" id="station">
 
     <div class="section-label">Station Equipment</div>
+
+    <div style="font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px">🇵🇭 DX1PRD — Navotas City, Philippines</div>
 
     <div class="radio-card">
       <div class="radio-card-top">
@@ -501,6 +592,33 @@
       <div class="radio-specs-row">
         <div class="rspec"><span class="rspec-key">Platform</span><span class="rspec-val">Beelink T4 Pro</span></div>
         <div class="rspec"><span class="rspec-key">Audio</span><span class="rspec-val">Mumble / CM108</span></div>
+        <div class="rspec"><span class="rspec-key">PTT</span><span class="rspec-val">Web PTT / CI-V CAT</span></div>
+        <div class="rspec"><span class="rspec-key">Access</span><span class="rspec-val">Tailscale VPN</span></div>
+      </div>
+    </div>
+
+    <div style="font-size:10px;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase;margin-top:20px;margin-bottom:10px">🇺🇸 KE6YEP — Pomona, California</div>
+
+    <div class="radio-card">
+      <div class="radio-card-top">
+        <span class="radio-name">Icom IC-7300</span>
+        <span class="radio-tag tag-hf">HF / 6m</span>
+      </div>
+      <div class="radio-specs-row">
+        <div class="rspec"><span class="rspec-key">Output</span><span class="rspec-val">100 W HF</span></div>
+        <div class="rspec"><span class="rspec-key">Bands</span><span class="rspec-val">160 m – 6 m</span></div>
+        <div class="rspec"><span class="rspec-key">Modes</span><span class="rspec-val">SSB / CW / AM / FM / RTTY</span></div>
+      </div>
+    </div>
+
+    <div class="radio-card">
+      <div class="radio-card-top">
+        <span class="radio-name">Remote Access Stack</span>
+        <span class="radio-tag tag-net">Web Interface</span>
+      </div>
+      <div class="radio-specs-row">
+        <div class="rspec"><span class="rspec-key">Platform</span><span class="rspec-key">Mini PC</span></div>
+        <div class="rspec"><span class="rspec-key">Audio</span><span class="rspec-val">Mumble / USB</span></div>
         <div class="rspec"><span class="rspec-key">PTT</span><span class="rspec-val">Web PTT / CI-V CAT</span></div>
         <div class="rspec"><span class="rspec-key">Access</span><span class="rspec-val">Tailscale VPN</span></div>
       </div>
@@ -665,11 +783,12 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-text">
-    <strong>DX1PRD Amateur Radio Club</strong> · Navotas City, Philippines<br>
+    <strong>PAREDN Remote Station Portal</strong><br>
+    Philippine Amateur Radio Emergency Data Network<br>
     Station Trustee: <strong>DW1IRF / K6IRF</strong> &nbsp;·&nbsp; PAREDN Network Coordinator<br>
-    Philippine Amateur Radio Emergency Data Network
+    DX1PRD Amateur Radio Club · Navotas City, Philippines
   </div>
-  <div class="footer-logo">DX1PRD</div>
+  <div class="footer-logo">PAREDN</div>
 </footer>
 
 <script>
