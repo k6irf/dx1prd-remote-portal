@@ -435,7 +435,13 @@
           <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;letter-spacing:0.05em;line-height:1">DX1PRD</div>
           <div style="font-size:11px;color:var(--muted);margin-top:2px">Navotas City, Philippines</div>
         </div>
-        <div id="status-ph" style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px;background:rgba(39,174,96,0.1);color:#4ADE80;border:1px solid rgba(39,174,96,0.3)">Checking…</div>
+        <div style="text-align:right">
+          <div style="font-size:9px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase">Local (PHT)</div>
+          <div id="ph-time" style="font-family:monospace;font-size:13px;color:var(--gold-light);font-weight:700">--:--</div>
+          <div style="font-size:9px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:3px">UTC</div>
+          <div id="ph-utc" style="font-family:monospace;font-size:11px;color:var(--muted)">--:--</div>
+          <div id="status-ph" style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px;background:rgba(39,174,96,0.1);color:#4ADE80;border:1px solid rgba(39,174,96,0.3);margin-top:6px;display:inline-block">Checking…</div>
+        </div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
         <div><div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Radio</div><div style="font-size:12px;font-weight:600;color:var(--text)" id="ph-radio">IC-7000</div></div>
@@ -458,7 +464,13 @@
           <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;letter-spacing:0.05em;line-height:1">KE6YEP</div>
           <div style="font-size:11px;color:var(--muted);margin-top:2px">Fontana, California — OMEGA</div>
         </div>
-        <div id="status-ca" style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px;background:rgba(39,174,96,0.1);color:#4ADE80;border:1px solid rgba(39,174,96,0.3)">Checking…</div>
+        <div style="text-align:right">
+          <div style="font-size:9px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase">Local (PDT)</div>
+          <div id="ca-time" style="font-family:monospace;font-size:13px;color:#93C5FD;font-weight:700">--:--</div>
+          <div style="font-size:9px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:3px">UTC</div>
+          <div id="ca-utc" style="font-family:monospace;font-size:11px;color:var(--muted)">--:--</div>
+          <div id="status-ca" style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px;background:rgba(39,174,96,0.1);color:#4ADE80;border:1px solid rgba(39,174,96,0.3);margin-top:6px;display:inline-block">Checking…</div>
+        </div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
         <div><div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Radio</div><div style="font-size:12px;font-weight:600;color:var(--text)" id="ca-radio">IC-7300</div></div>
@@ -841,6 +853,35 @@
     t.style.display = 'block';
     t.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
+
+  // ── CLOCKS ──
+  function updateClocks() {
+    const now = new Date();
+    const utc = now.toUTCString().match(/(\d{2}:\d{2}:\d{2})/)[0];
+
+    // Philippines PHT = UTC+8
+    const ph = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Manila' }));
+    const phStr = ph.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+    // California PT (auto DST)
+    const ca = new Date(now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }));
+    const caStr = ca.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+    // Detect DST for label
+    const isDST = ca.getTimezoneOffset() < new Date(ca.getFullYear(), 0, 1).getTimezoneOffset();
+
+    document.getElementById('ph-time').textContent = phStr;
+    document.getElementById('ph-utc').textContent = utc;
+    document.getElementById('ca-time').textContent = caStr;
+    document.getElementById('ca-utc').textContent = utc;
+
+    // Update PDT/PST label dynamically
+    const caLabel = document.querySelector('#ca-time').previousElementSibling;
+    if (caLabel) caLabel.textContent = isDST ? 'Local (PDT)' : 'Local (PST)';
+  }
+
+  updateClocks();
+  setInterval(updateClocks, 1000);
 
   // ── LIVE STATION STATUS ──
   const stations = [
