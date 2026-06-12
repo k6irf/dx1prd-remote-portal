@@ -401,18 +401,75 @@
   <div class="hero-inner">
     <div class="badge"><span class="dot"></span> Station Online</div>
     <h1>DX1PRD<br><em>Remote</em><br>Station</h1>
-    <p class="hero-sub">Operate the DX1PRD club station from anywhere in the world. Full HF capability, remotely controlled via the internet — available to licensed club members and affiliated friends of the club.</p>
+    <p class="hero-sub">Operate DX1PRD or KE6YEP remote stations from anywhere in the world. Full HF capability, remotely controlled via Tailscale VPN — available to licensed club members and affiliated friends of the club.</p>
     <div class="specs-row">
-      <div class="spec"><span class="spec-label">Location</span><span class="spec-value">Navotas City, Philippines</span></div>
+      <div class="spec"><span class="spec-label">PH Station</span><span class="spec-value">DX1PRD — Navotas</span></div>
       <div class="spec-divider"></div>
-      <div class="spec"><span class="spec-label">Primary Rig</span><span class="spec-value">Icom IC-7000</span></div>
+      <div class="spec"><span class="spec-label">CA Station</span><span class="spec-value">KE6YEP — Pomona</span></div>
       <div class="spec-divider"></div>
-      <div class="spec"><span class="spec-label">Grid</span><span class="spec-value">PK61be</span></div>
+      <div class="spec"><span class="spec-label">PH Rig</span><span class="spec-value">Icom IC-7000</span></div>
       <div class="spec-divider"></div>
-      <div class="spec"><span class="spec-label">Club</span><span class="spec-value">DX1PRD — Navotas</span></div>
+      <div class="spec"><span class="spec-label">CA Rig</span><span class="spec-value">Icom IC-7300</span></div>
       <div class="spec-divider"></div>
       <div class="spec"><span class="spec-label">Trustee</span><span class="spec-value">DW1IRF / K6IRF</span></div>
     </div>
+  </div>
+</section>
+
+<!-- STATION SELECTOR -->
+<section style="padding:48px 48px 0;border-bottom:1px solid var(--border)">
+  <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:10px;margin-bottom:24px">
+    Choose Your Station
+    <span style="flex:1;height:1px;background:var(--border);display:block"></span>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;padding-bottom:48px">
+
+    <!-- DX1PRD Philippines -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:24px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#C8952A,#F0B942)"></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;letter-spacing:0.05em;line-height:1">DX1PRD</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">Navotas City, Philippines</div>
+        </div>
+        <div id="status-ph" style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px;background:rgba(39,174,96,0.1);color:#4ADE80;border:1px solid rgba(39,174,96,0.3)">Checking…</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
+        <div><div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Radio</div><div style="font-size:12px;font-weight:600;color:var(--text)" id="ph-radio">IC-7000</div></div>
+        <div><div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Frequency</div><div style="font-size:12px;font-weight:600;color:var(--gold-light)" id="ph-freq">—</div></div>
+        <div><div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Mode</div><div style="font-size:12px;font-weight:600;color:var(--text)" id="ph-mode">—</div></div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:4px">
+        <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Access</div>
+        <div style="font-size:11px;color:#93C5FD;font-weight:600">Tailscale VPN</div>
+      </div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:16px;font-family:monospace">100.69.3.43:3000</div>
+      <a href="http://100.69.3.43:3000" target="_blank" style="display:block;text-align:center;background:var(--gold);color:#0A0C0F;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:10px;border-radius:3px;text-decoration:none;transition:background 0.15s" onmouseover="this.style.background='#F0B942'" onmouseout="this.style.background='#C8952A'">▶ Connect to DX1PRD</a>
+    </div>
+
+    <!-- KE6YEP California -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:24px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#2563EB,#60A5FA)"></div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+        <div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;letter-spacing:0.05em;line-height:1">KE6YEP</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:2px">Pomona, California — OMEGA</div>
+        </div>
+        <div id="status-ca" style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px;background:rgba(39,174,96,0.1);color:#4ADE80;border:1px solid rgba(39,174,96,0.3)">Checking…</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">
+        <div><div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Radio</div><div style="font-size:12px;font-weight:600;color:var(--text)" id="ca-radio">IC-7300</div></div>
+        <div><div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Frequency</div><div style="font-size:12px;font-weight:600;color:#93C5FD" id="ca-freq">—</div></div>
+        <div><div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Mode</div><div style="font-size:12px;font-weight:600;color:var(--text)" id="ca-mode">—</div></div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:4px">
+        <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Access</div>
+        <div style="font-size:11px;color:#93C5FD;font-weight:600">Tailscale VPN</div>
+      </div>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:16px;font-family:monospace">100.97.58.17:3000</div>
+      <a href="http://100.97.58.17:3000" target="_blank" style="display:block;text-align:center;background:#2563EB;color:#fff;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:10px;border-radius:3px;text-decoration:none;transition:background 0.15s" onmouseover="this.style.background='#1D4ED8'" onmouseout="this.style.background='#2563EB'">▶ Connect to KE6YEP</a>
+    </div>
+
   </div>
 </section>
 
@@ -669,6 +726,45 @@
     t.style.display = 'block';
     t.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
+
+  // ── LIVE STATION STATUS ──
+  const stations = [
+    { url: 'http://100.69.3.43:3000', freqEl: 'ph-freq', modeEl: 'ph-mode', statusEl: 'status-ph' },
+    { url: 'http://100.97.58.17:3000', freqEl: 'ca-freq', modeEl: 'ca-mode', statusEl: 'status-ca' }
+  ];
+
+  function setOnline(s, online) {
+    const el = document.getElementById(s.statusEl);
+    if (online) {
+      el.textContent = 'Online';
+      el.style.background = 'rgba(39,174,96,0.1)';
+      el.style.color = '#4ADE80';
+      el.style.borderColor = 'rgba(39,174,96,0.3)';
+    } else {
+      el.textContent = 'Offline';
+      el.style.background = 'rgba(192,57,43,0.1)';
+      el.style.color = '#F87171';
+      el.style.borderColor = 'rgba(192,57,43,0.3)';
+    }
+  }
+
+  async function pollStation(s) {
+    try {
+      const r = await fetch(s.url + '/api/public/status', { mode: 'cors', signal: AbortSignal.timeout(4000) });
+      if (!r.ok) throw new Error();
+      const d = await r.json();
+      document.getElementById(s.freqEl).textContent = d.freq ? (d.freq/1e6).toFixed(3)+' MHz' : '—';
+      document.getElementById(s.modeEl).textContent = d.mode || '—';
+      setOnline(s, true);
+    } catch(e) {
+      document.getElementById(s.freqEl).textContent = '—';
+      document.getElementById(s.modeEl).textContent = '—';
+      setOnline(s, false);
+    }
+  }
+
+  stations.forEach(pollStation);
+  setInterval(() => stations.forEach(pollStation), 30000);
 
   // Auto-uppercase callsign input
   document.getElementById('f-call').addEventListener('input', function() {
