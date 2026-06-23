@@ -914,6 +914,7 @@
       document.getElementById(s.modeEl).textContent = d.mode || '—';
       setOnline(s, true);
     } catch(e) {
+      console.error('pollStation failed for ' + s.url + ' — ' + e.name + ': ' + e.message);
       document.getElementById(s.freqEl).textContent = '—';
       document.getElementById(s.modeEl).textContent = '—';
       setOnline(s, false);
