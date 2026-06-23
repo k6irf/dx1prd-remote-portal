@@ -907,7 +907,7 @@
 
   async function pollStation(s) {
     try {
-      const r = await fetch(s.url + '/api/public/status', { mode: 'cors', signal: AbortSignal.timeout(4000) });
+      const r = await fetch(s.url + '/api/public/status', { mode: 'cors', signal: AbortSignal.timeout(10000) });
       if (!r.ok) throw new Error();
       const d = await r.json();
       document.getElementById(s.freqEl).textContent = d.freq ? (d.freq/1e6).toFixed(3)+' MHz' : '—';
@@ -921,7 +921,8 @@
   }
 
   stations.forEach(pollStation);
-  setInterval(() => stations.forEach(pollStation), 30000);
+  setTimeout(() => stations.forEach(pollStation), 5000);
+  setInterval(() => stations.forEach(pollStation), 15000);
 
   // Auto-uppercase callsign input
   document.getElementById('f-call').addEventListener('input', function() {
