@@ -404,7 +404,7 @@
     <div class="badge"><span class="dot"></span> Station Online</div>
     <h1>PAREDN<br><em>Remote</em><br>Station Portal</h1>
     <p style="font-size:12px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:16px;margin-top:-8px">Philippine Amateur Radio Emergency Data Network</p>
-    <p class="hero-sub">Operate DX1PRD or KE6YEP remote stations from anywhere in the world. Full HF capability, remotely controlled via Tailscale VPN — available to licensed club members and affiliated friends of the club.</p>
+    <p class="hero-sub">Operate DX1PRD or KE6YEP remote stations from anywhere in the world. Full HF capability, remotely controlled via a direct web connection — no VPN software required — available to licensed club members and affiliated friends of the club.</p>
     <div class="specs-row">
       <div class="spec"><span class="spec-label">PH Station</span><span class="spec-value">DX1PRD — Navotas City, Philippines</span></div>
       <div class="spec-divider"></div>
@@ -450,10 +450,10 @@
       </div>
       <div style="display:flex;gap:10px;align-items:center;margin-bottom:4px">
         <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Access</div>
-        <div style="font-size:11px;color:#93C5FD;font-weight:600">Tailscale VPN</div>
+        <div style="font-size:11px;color:#93C5FD;font-weight:600">Direct Web Access</div>
       </div>
-      <div style="font-size:10px;color:var(--muted);margin-bottom:16px;font-family:monospace">100.117.112.104:3000</div>
-      <a href="http://100.117.112.104:3000" target="_blank" style="display:block;text-align:center;background:var(--gold);color:#0A0C0F;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:10px;border-radius:3px;text-decoration:none;transition:background 0.15s" onmouseover="this.style.background='#F0B942'" onmouseout="this.style.background='#C8952A'">▶ Connect to DX1PRD</a>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:16px;font-family:monospace">dx1prd.duckdns.org:3000</div>
+      <a href="http://dx1prd.duckdns.org:3000" target="_blank" style="display:block;text-align:center;background:var(--gold);color:#0A0C0F;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:10px;border-radius:3px;text-decoration:none;transition:background 0.15s" onmouseover="this.style.background='#F0B942'" onmouseout="this.style.background='#C8952A'">▶ Connect to DX1PRD</a>
     </div>
 
     <!-- KE6YEP California -->
@@ -479,10 +479,10 @@
       </div>
       <div style="display:flex;gap:10px;align-items:center;margin-bottom:4px">
         <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)">Access</div>
-        <div style="font-size:11px;color:#93C5FD;font-weight:600">Tailscale VPN</div>
+        <div style="font-size:11px;color:#93C5FD;font-weight:600">Direct Web Access</div>
       </div>
-      <div style="font-size:10px;color:var(--muted);margin-bottom:16px;font-family:monospace">100.65.42.18:3000</div>
-      <a href="http://100.65.42.18:3000" target="_blank" style="display:block;text-align:center;background:#2563EB;color:#fff;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:10px;border-radius:3px;text-decoration:none;transition:background 0.15s" onmouseover="this.style.background='#1D4ED8'" onmouseout="this.style.background='#2563EB'">▶ Connect to KE6YEP</a>
+      <div style="font-size:10px;color:var(--muted);margin-bottom:16px;font-family:monospace">ke6yep.duckdns.org:3000</div>
+      <a href="http://ke6yep.duckdns.org:3000" target="_blank" style="display:block;text-align:center;background:#2563EB;color:#fff;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:10px;border-radius:3px;text-decoration:none;transition:background 0.15s" onmouseover="this.style.background='#1D4ED8'" onmouseout="this.style.background='#2563EB'">▶ Connect to KE6YEP</a>
     </div>
 
   </div>
@@ -497,28 +497,28 @@
 
   <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
 
-    <!-- Tailscale -->
+    <!-- How to Connect -->
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:24px">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
         <div style="width:36px;height:36px;background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.3);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:18px">🔒</div>
         <div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;letter-spacing:0.05em">Tailscale VPN</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;letter-spacing:0.05em">Direct Web Access</div>
           <div style="font-size:10px;color:var(--muted)">Required for access</div>
         </div>
       </div>
       <div style="font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:16px">
-        Both stations are only accessible via <strong style="color:var(--text)">Tailscale VPN</strong>. You must be on the same Tailscale network as the station to connect.
+        Both stations are accessible directly in your browser — <strong style="color:var(--text)">no VPN or extra software required</strong>. Just open the station URL after your access is approved.
       </div>
       <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:12px;margin-bottom:12px">
         <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Setup Steps</div>
         <ol style="font-size:11px;color:var(--text);line-height:2;padding-left:16px">
-          <li>Download Tailscale from <strong>tailscale.com</strong></li>
+          <li>Apply for access using the form on this page</li>
           <li>Install and sign in with your account</li>
           <li>Contact trustee to be added to the network</li>
-          <li>Once approved, stations will appear in your Tailscale peer list</li>
+          <li>Once approved, you will receive the station URL and login credentials by email</li>
         </ol>
       </div>
-      <a href="https://tailscale.com/download" target="_blank" style="display:block;text-align:center;background:rgba(37,99,235,0.15);color:#93C5FD;border:1px solid rgba(37,99,235,0.3);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:8px;border-radius:3px;text-decoration:none">Download Tailscale →</a>
+      <a href="http://dx1prd.duckdns.org:3000" target="_blank" style="display:block;text-align:center;background:rgba(37,99,235,0.15);color:#93C5FD;border:1px solid rgba(37,99,235,0.3);font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:8px;border-radius:3px;text-decoration:none">Open DX1PRD Station →</a>
     </div>
 
     <!-- Mumble -->
@@ -536,7 +536,7 @@
       <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:12px;margin-bottom:12px">
         <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Mumble Settings</div>
         <table style="width:100%;font-size:11px;border-collapse:collapse">
-          <tr><td style="color:var(--muted);padding:2px 0">Server</td><td style="color:var(--gold-light);font-weight:600;font-family:monospace">Station Tailscale IP</td></tr>
+          <tr><td style="color:var(--muted);padding:2px 0">Server</td><td style="color:var(--gold-light);font-weight:600;font-family:monospace">dx1prd.duckdns.org:3000</td></tr>
           <tr><td style="color:var(--muted);padding:2px 0">Port</td><td style="color:var(--text);font-weight:600;font-family:monospace">64738</td></tr>
           <tr><td style="color:var(--muted);padding:2px 0">Password</td><td style="color:var(--text);font-weight:600;font-family:monospace">paredn2024</td></tr>
           <tr><td style="color:var(--muted);padding:2px 0">Transmission</td><td style="color:#4ADE80;font-weight:600">Continuous</td></tr>
@@ -556,14 +556,14 @@
         </div>
       </div>
       <div style="font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:16px">
-        The station control panel runs in any modern browser. No plugins needed — just open the station URL while connected to Tailscale.
+        The station control panel runs in any modern browser. No plugins needed — just open the station URL in any modern browser after access is approved.
       </div>
       <div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:12px;margin-bottom:12px">
-        <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Station URLs (Tailscale)</div>
+        <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Station URLs</div>
         <div style="font-size:11px;color:var(--muted);margin-bottom:4px">🇵🇭 DX1PRD — Philippines</div>
-        <div style="font-family:monospace;font-size:11px;color:var(--gold-light);margin-bottom:10px">http://100.117.112.104:3000</div>
+        <div style="font-family:monospace;font-size:11px;color:var(--gold-light);margin-bottom:10px">http://dx1prd.duckdns.org:3000</div>
         <div style="font-size:11px;color:var(--muted);margin-bottom:4px">🇺🇸 KE6YEP — California</div>
-        <div style="font-family:monospace;font-size:11px;color:#93C5FD">http://100.65.42.18:3000</div>
+        <div style="font-family:monospace;font-size:11px;color:#93C5FD">http://ke6yep.duckdns.org:3000</div>
       </div>
     </div>
 
@@ -601,7 +601,7 @@
         <div class="rspec"><span class="rspec-key">Platform</span><span class="rspec-val">Beelink T4 Pro</span></div>
         <div class="rspec"><span class="rspec-key">Audio</span><span class="rspec-val">Mumble / CM108</span></div>
         <div class="rspec"><span class="rspec-key">PTT</span><span class="rspec-val">Web PTT / CI-V CAT</span></div>
-        <div class="rspec"><span class="rspec-key">Access</span><span class="rspec-val">Tailscale VPN</span></div>
+        <div class="rspec"><span class="rspec-key">Access</span><span class="rspec-val">Direct Web Access</span></div>
       </div>
     </div>
 
@@ -628,7 +628,7 @@
         <div class="rspec"><span class="rspec-key">Platform</span><span class="rspec-key">Mini PC</span></div>
         <div class="rspec"><span class="rspec-key">Audio</span><span class="rspec-val">Mumble / USB</span></div>
         <div class="rspec"><span class="rspec-key">PTT</span><span class="rspec-val">Web PTT / CI-V CAT</span></div>
-        <div class="rspec"><span class="rspec-key">Access</span><span class="rspec-val">Tailscale VPN</span></div>
+        <div class="rspec"><span class="rspec-key">Access</span><span class="rspec-val">Direct Web Access</span></div>
       </div>
     </div>
 
@@ -885,8 +885,8 @@
 
   // ── LIVE STATION STATUS ──
   const stations = [
-    { url: 'http://100.117.112.104:3000', freqEl: 'ph-freq', modeEl: 'ph-mode', statusEl: 'status-ph' },
-    { url: 'http://100.65.42.18:3000', freqEl: 'ca-freq', modeEl: 'ca-mode', statusEl: 'status-ca' }
+    { url: 'http://dx1prd.duckdns.org:3000', freqEl: 'ph-freq', modeEl: 'ph-mode', statusEl: 'status-ph' },
+    { url: 'http://ke6yep.duckdns.org:3000', freqEl: 'ca-freq', modeEl: 'ca-mode', statusEl: 'status-ca' }
   ];
 
   function setOnline(s, online) {
